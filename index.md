@@ -9,6 +9,8 @@
 
 To install Julia, I recommend using [`juliaup`](https://github.com/JuliaLang/juliaup), which presumably (?) stands for "Julia updater." Julia as a *language* is stable (code you write today should work far into the future), but as an *experience* it keeps improving. `juliaup` makes it trivial to migrate to new julia versions, to have multiple versions installed simultaneously, and to select the one you prefer as your default.
 
+Para instalar Julia, te recomiendo usar [`juliaup`](https://github.com/JuliaLang/juliaup), que supuestamente (?) significa "actualizador de Julia". Julia, como lenguaje, es estable (el código que escribas hoy debería funcionar por mucho tiempo en el futuro), pero como experiencia sigue mejorando. juliaup hace que sea trivial migrar a nuevas versiones de Julia, tener múltiples versiones instaladas simultáneamente y seleccionar la que prefieres como tu versión predeterminada.
+
 Follow the instructions to install `juliaup` on the page linked above. Follow their advice to avoid use of software repositories (e.g., homebrew) and stick to the recommended methods.
 
 Installing `juliaup` will automatically install the current stable release of Julia. At present (spring 2023), I also recommend installing and using the "beta" release:
@@ -17,7 +19,6 @@ Installing `juliaup` will automatically install the current stable release of Ju
 juliaup add beta
 juliaup default beta
 ```
-
 as the upcoming Julia 1.9 has some features that make it more pleasant to use. (Notably, plotting, DataFrames/CSV files, etc are much faster on first use.) However, if you encounter trouble you can always go back to 1.8.x:
 
 ```
