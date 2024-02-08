@@ -46,8 +46,10 @@ typeof(a)
     @test isa(r, AbstractUnitRange) && first(r) == 2 && last(r) == 5
 
     # Create an array that stores `Float64`s but otherwise holds the same values as `r` above
-    rf = collect(Float64, r)
-    @test eltype(rf) == Float64 && rf == r
+    r = collect(r)
+    rfloat = convert(Array{Float64}, r);
+    eltype(rfloat)
+    @test eltype(rfloat) == Float64 && rfloat == r
 
     # Create a matrix equal to a 2x2 identity matrix (1 on the diagonal, zero on the corners)
     M =
