@@ -1,0 +1,95 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/katex/katex.min.css"> <link rel=stylesheet  href="/libs/highlight/styles/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <title>Estudiando Julia (Parte 1)</title> <div class=franklin-content ><h1 id=installing_julia_and_setting_up_your_environment ><a href="#installing_julia_and_setting_up_your_environment" class=header-anchor >Installing Julia and setting up your environment</a></h1> <h2 id=juliaup ><a href="#juliaup" class=header-anchor ><code>juliaup</code></a></h2> <p>To install Julia, I recommend using <a href="https://github.com/JuliaLang/juliaup"><code>juliaup</code></a>, which presumably &#40;?&#41; stands for &quot;Julia updater.&quot; Julia as a <em>language</em> is stable &#40;code you write today should work far into the future&#41;, but as an <em>experience</em> it keeps improving. <code>juliaup</code> makes it trivial to migrate to new julia versions, to have multiple versions installed simultaneously, and to select the one you prefer as your default.</p> <p>Follow the instructions to install <code>juliaup</code> on the page linked above. Follow their advice to avoid use of software repositories &#40;e.g., homebrew&#41; and stick to the recommended methods.</p> <p>Installing <code>juliaup</code> will automatically install the current stable release of Julia. At present &#40;spring 2023&#41;, I also recommend installing and using the &quot;beta&quot; release:</p> <pre><code class="julia hljs">juliaup add beta
+juliaup default beta</code></pre> <p>as the upcoming Julia 1.9 has some features that make it more pleasant to use. &#40;Notably, plotting, DataFrames/CSV files, etc are much faster on first use.&#41; However, if you encounter trouble you can always go back to 1.8.x:</p> <pre><code class="julia hljs">juliaup default release</code></pre>
+<p>that is the current stable release.</p>
+<h2 id=add_the_julia_extension_for_vs_code ><a href="#add_the_julia_extension_for_vs_code" class=header-anchor >Add the Julia extension for VS Code</a></h2>
+<p>Add support for Julia via the normal <a href="https://code.visualstudio.com/docs/editor/extension-marketplace">extensions</a> mechanism:</p>
+<ul>
+<li><p>click on the extensions icon</p>
+
+<li><p>type <code>julia</code> in the search bar; the Julia extension should be the first entry</p>
+
+<li><p>click <code>Install</code>. You should see a new icon with 3 circles appear.</p>
+
+<li><p><strong>Important</strong>: if you decide to use the <code>beta</code> version of Julia, click on the Julia extension in the search pane to open its full description. In the description page, click on &quot;Switch to Pre-Release Version&quot; &#40;near the top&#41;.  Support for Julia 1.9 has not yet landed in the released version of the extension.</p>
+
+</ul>
+<h2 id=launch_julia_from_within_vs_code ><a href="#launch_julia_from_within_vs_code" class=header-anchor >Launch Julia from within VS Code</a></h2>
+<p>Open VS Code and then start the Julia REPL: on Windows the default key binding is <code>Alt-j Alt-o</code>. I&#39;m not certain what it is on Macs, but on any platform you can discover it in the following way:</p>
+<ul>
+<li><p>in the menus across the top, click <code>View</code> -&gt; <code>Command Palette...</code></p>
+
+<li><p>in the palette search bar, type &quot;julia repl&quot;</p>
+
+<li><p>find the entry that says &quot;Julia: Start REPL&quot;. Either click on it or note the assigned shortcut. If there is no shortcut, consider assigning one &#40;click on the &quot;gears&quot; icon to configure&#41;.</p>
+
+</ul>
+<p>After you do this, you should see the main editing pane split in two and after a short delay see</p>
+<pre><code class="julia hljs">julia&gt;</code></pre>
+<p>in the window. If so, congrats&#33; You are ready to start playing interactively with Julia.</p>
+<p>Note that there are many ways to run the Julia REPL, including via a separate terminal program and from Jupyter notebooks launched via Anaconda; the reading below will describe some of these other approaches in more detail. This course will generally assume you&#39;re using the VS Code REPL, but there is nothing wrong with other approaches.</p>
+<p>See <a href="https://www.julia-vscode.org/docs/stable/">here for full documentation on VS Code-Julia integration</a>. One particularly worthwhile step: check the keybindings for <a href="https://www.julia-vscode.org/docs/stable/userguide/runningcode/">code execution</a>:</p>
+<ul>
+<li><p>in the menus across the top, click <code>View</code> -&gt; <code>Command Palette...</code></p>
+
+<li><p>in the palette search bar, type &quot;julia execute&quot;</p>
+
+<li><p>check the assigned shortcuts for various options, particularly &quot;Julia: Execute Code in REPL&quot;</p>
+
+</ul>
+<p>I find the most useful one is &quot;Julia: Execute Code in REPL&quot;, which executes any code you have selected in the edit pane. This greatly facilitates interactive development as it allows you to inspect the results of individual lines as you write and debug code in scripts and packages.</p>
+<h1 id=sources_for_learning ><a href="#sources_for_learning" class=header-anchor >Sources for learning</a></h1>
+<p>The <a href="https://julialang.org/learning/">learning page</a> lists many resources for learning Julia.  You are allowed to consult any source, but here are some recommendations:</p>
+<ul>
+<li><p>for experienced programmers, <a href="https://en.wikibooks.org/wiki/Introducing_Julia">the wiki</a> seems to be a fairly good blend of didactic and practical material presented in a compact, efficient manner.  I recommend this as your default source.  Its main weakness is that it&#39;s not completely &quot;linear&quot; so you may need to read other sections to understand some of the points in the section you&#39;re studying. One important point: <strong>ignore their installation advice</strong>, use the <code>juliaup</code> approach described above.</p>
+
+<li><p>if you need a little more systematic explanation, <a href="https://benlauwens.github.io/ThinkJulia.jl/latest/book.html">Think Julia</a> provides a more polished experience at the expense of being longer</p>
+
+<li><p>the <a href="https://docs.julialang.org/en/v1/">manual</a> is the most authoritative and up-to-date of all of these. Many chapters are excellent. The only reason I don&#39;t recommend it as a primary learning tool is that the manual is uneven in its expectations: some chapters are written for the needs of near-beginners, whereas making sense of others almost requires a computer science degree. Don&#39;t be afraid to consult the manual, it really is great in many places, but don&#39;t be discouraged about your own progress if the portions you happen to read end up being confusing.</p>
+
+<li><p>since all of you know at least one other language, the <a href="https://docs.julialang.org/en/v1/manual/noteworthy-differences/">Noteworthy differences page</a> of the manual may help you get up to speed quickly.</p>
+
+</ul>
+<h2 id=reading_for_week_1 ><a href="#reading_for_week_1" class=header-anchor >Reading for week 1</a></h2>
+<p>We&#39;ll mostly read the wiki &#40;out of its default order, and with omission of some chapters&#41;.  A close second choice would be the corresponding manual chapters.</p>
+<p>In the wiki:</p>
+<ul>
+<li><p><a href="https://en.wikibooks.org/wiki/Introducing_Julia/The_REPL">The REPL</a></p>
+
+<li><p>Modules and packages:</p>
+<ul>
+<li><p><a href="https://en.wikibooks.org/wiki/Introducing_Julia/Modules_and_packages">Intro to modules and packages</a></p>
+
+<li><p><a href="https://pkgdocs.julialang.org/v1/getting-started">Pkg: getting started</a></p>
+
+<li><p><a href="https://pkgdocs.julialang.org/v1/managing-packages">Pkg: managing packages</a></p>
+
+</ul>
+<p><strong>Pro tip</strong>: the two <code>Pkg</code> documentation pages were generated with <a href="https://juliadocs.github.io/Documenter.jl/stable/">Documenter.jl</a>, which we&#39;ll learn to use in the course. Importantly, all of the pages it produces have a little &quot;Version&quot; indicator in the lower left. For <code>Pkg</code>, make sure the version matches your Julia version &#40;type <code>Base.VERSION</code> in the REPL if you&#39;re unsure&#41;.  If you&#39;re reading documentation on a specific package, it should match the package version you have installed &#40;see <code>Pkg.status</code> or <code>pkg&gt; status</code>&#41;. If you&#39;re using a beta version of Julia, choose <code>dev</code>.</p>
+
+<li><p><a href="https://en.wikibooks.org/wiki/Introducing_Julia/Arrays_and_tuples">Arrays and tuples</a></p>
+
+<li><p><a href="https://en.wikibooks.org/wiki/Introducing_Julia/Strings_and_characters">Strings and characters</a></p>
+
+<li><p><a href="https://en.wikibooks.org/wiki/Introducing_Julia/Dictionaries_and_sets">Dictionaries and sets</a></p>
+
+<li><p><a href="https://en.wikibooks.org/wiki/Introducing_Julia/Controlling_the_flow">Controlling the flow</a>. Particularly useful on the first homework are the parts on <code>for</code> loops, comprehensions, and generators.</p>
+
+<li><p><strong>as needed</strong> <a href="https://docs.julialang.org/en/v1/manual/faq/">Frequently asked questions</a> might contain the answer to something that&#39;s bothering you. Also see the resources on the <a href="https://julialang.org/community/">community page</a>.</p>
+
+</ul>
+<h2 id=problems ><a href="#problems" class=header-anchor >Problems</a></h2>
+<p>The problems are now distributed via GitHub classroom. See the <a href="../README.md">2021 edition</a> of the course if you&#39;re using this externally.</p>
+<div class=page-foot >
+    <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> Uri Groisman, Instituto Newton, Montevideo, Uruguay. Last modified: February 08, 2024.
+    Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+</div>
+</div>
+    
+        
+
+
+
+    
+    
+        <script src="/libs/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();hljs.configure({tabReplace: '    '});</script>
