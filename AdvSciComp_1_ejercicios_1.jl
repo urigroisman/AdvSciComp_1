@@ -52,19 +52,23 @@ typeof(a)
     @test eltype(rfloat) == Float64 && rfloat == r
 
     # Create a matrix equal to a 2x2 identity matrix (1 on the diagonal, zero on the corners)
-    M =
+    M = [1 0; 0 1]
     @test size(M) == (2,2) && M[1,1] == M[2,2] == 1 && M[1,2] == M[2,1] == 0
 
     # Create a vector of `String`s that has 3 undefined elements, then make the middle one equal to "Julia"
-    vstr =
+    vstr = Array{String}(undef, 3)
+    vstr[2] = "Julia"
+    vstr
     # you will need one more line here
     @test length(vstr) == 3 && eltype(vstr) == String && !isassigned(vstr, 1) && !isassigned(vstr, 3) && vstr[2] == "Julia"
 
     # Create two ranges, `row` and `col`: row should go from 1 to 3 (integers) and `col` should contain the even numbers between 2 and 8.
     # Use broadcasting to form a matrix of their product.
-    row =
-    col =
-    m =
+    row = 1:3
+    col = 2:2:8
+    row = collect(row) # opción 1 sin broadcasting, naive coding
+    table
+    m = row .* col' # usando broadcasting
     @test isa(row, AbstractUnitRange) && isa(col, AbstractRange) && first(row) == 1 && last(row) == 3 &&
           first(col) == 2 && last(col) == 8 && step(col) == 2
     @test m ==
@@ -74,7 +78,15 @@ typeof(a)
     ]
 
     # Create a tuple with a `String`, an `Int`, and a `Float64` (of your choice) in that order
-    t =
+    
+    # Creating a tuple with explicit types
+    my_explicit_tuple = Tuple{String, Int, Float64} # definiendo tipos, sin datos
+    
+    t1 = Tuple{String, Int, Float64}(["string", 123, 4.0])
+    # my_explicit_tuple is also of type Tuple{String,Int,Float64}
+
+    t = ("hola", 1, 1.0)  # Alcanza con esta definición  Julia encuentra los tipos sola.
+
     @test isa(t, Tuple) && isa(t[1], String) && isa(t[2], Int) && isa(t[3], Float64)
 
     # Create a NamedTuple with fields `make` and `model` with values "Honda" and "Odyssey", respectively
