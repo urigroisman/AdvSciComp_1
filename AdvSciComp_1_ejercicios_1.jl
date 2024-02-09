@@ -90,14 +90,17 @@ typeof(a)
     @test isa(t, Tuple) && isa(t[1], String) && isa(t[2], Int) && isa(t[3], Float64)
 
     # Create a NamedTuple with fields `make` and `model` with values "Honda" and "Odyssey", respectively
-    nt =
+    nt = (
+        make = "Honda",
+        model = "Odyssey"
+    )
     @test nt.make == "Honda"
     @test nt.model == "Odyssey"
     @test isa(nt, NamedTuple)
 
     # Split this string into words
     str = "Advanced scientific computing"
-    sstr =
+    sstr = split(str)
     @test length(sstr) == 3 && sstr[1] == "Advanced" && sstr[2] == "scientific" && sstr[3] == "computing"
 
     # Now things will start getting a bit (just a bit) harder
@@ -107,7 +110,31 @@ typeof(a)
     # Alphabetize the words in this string, omitting any that contain a 'u'
     # Do not type the answer directly, generate it by exploiting Julia's string-manipulation functions
     animals = "dog cat opossum feline antelope chimp octopus salamander"
-    aanimals =  # feel free to use multiple lines to solve this; `aanimals` should hold your final answer
+    aanimals = sort(animals) # feel free to use multiple lines to solve this; `aanimals` should hold your final answer
+    # Otro camino usando for, if, etc
+    animals_1 = split(animals) 
+    
+    function sort_strings_bubble(strings_array::Array{String})
+        n = length(strings_array)
+        for i in 1:n
+            for j in 1:n-i
+                if strings_array[j] > strings_array[j+1]
+                    strings_array[j], strings_array[j+1] = strings_array[j+1], strings_array[j]
+                end
+            end
+        end
+        return strings_array
+    end
+
+# Usage:
+aanimals = sort_strings_bubble(animals_1)
+println(sorted_strings) # Output will be a sorted array of strings
+
+
+
+
+
+
     @test aanimals == ["antelope", "cat", "chimp", "dog", "feline", "salamander"]
 
     # Compute the sum of the ascii codes in `animals`, excluding spaces
